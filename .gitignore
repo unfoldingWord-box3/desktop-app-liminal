@@ -1,5 +1,6 @@
 .idea/
 linux/build/
+windows/build/
 
 # Logs
 logs
