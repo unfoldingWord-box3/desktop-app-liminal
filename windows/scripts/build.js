@@ -3,11 +3,11 @@ const fse = require('fs-extra');
 const copyDir = require('copy-dir');
 // Locations
 const BUILD_DIR = path.resolve('../build');
-if (BUILD_DIR.split("/").length < 5) {
+if (BUILD_DIR.split("\\").length < 5) {
     throw new Error(`Deleting build dir, but the path '${BUILD_DIR}' seems dangerously short. Aborting!`);
 }
 const SPEC_PATH = path.resolve('../../buildSpec.json');
-const LINUX_BUILD_RESOURCES = path.resolve("../buildResources");
+const WINDOWS_BUILD_RESOURCES = path.resolve("../buildResources");
 // Delete build dir if it exists
 if (fse.existsSync(BUILD_DIR)) {
     fse.rmSync(BUILD_DIR, { recursive: true, force: true });
@@ -16,14 +16,14 @@ if (fse.existsSync(BUILD_DIR)) {
 fse.mkdirSync(BUILD_DIR);
 // Load spec and extract some reusable information
 const spec = fse.readJsonSync(path.resolve(SPEC_PATH));
-const APP_NAME = spec['app']['name'];
+const APP_NAME = spec['app']['name'] + ".bat";
 // Copy and rename launcher script
 fse.copySync(
-    path.join(LINUX_BUILD_RESOURCES, "appLauncher.cmd"),
+    path.join(WINDOWS_BUILD_RESOURCES, "appLauncher.bat"),
     path.join(BUILD_DIR, APP_NAME)
 );
 // Copy and customize README
-const readMe = fse.readFileSync(path.join(LINUX_BUILD_RESOURCES, "README.md"))
+const readMe = fse.readFileSync(path.join(WINDOWS_BUILD_RESOURCES, "README.md"))
     .toString()
     .replace(/%%APP_NAME%%/g, APP_NAME);
 fse.writeFileSync(
@@ -42,7 +42,7 @@ fse.copySync(
 fse.mkdirSync(path.join(BUILD_DIR, "lib"));
 // Copy lib directories
 for (const libSrc of spec['lib'].map(s => path.resolve(s.src))) {
-    const srcLeaf = libSrc.split("/").reverse()[0];
+    const srcLeaf = libSrc.split("\\").reverse()[0];
     copyDir(
         libSrc,
         path.join(BUILD_DIR, "lib", srcLeaf),
@@ -53,7 +53,7 @@ for (const libSrc of spec['lib'].map(s => path.resolve(s.src))) {
 fse.mkdirSync(path.join(BUILD_DIR, "lib", "clients"));
 // Copy clients:
 for (const libClientSrc of spec['libClients'].map(s => path.resolve(s))) {
-    const clientSrcLeaf = libClientSrc.split("/").reverse()[0];
+    const clientSrcLeaf = libClientSrc.split("\\").reverse()[0];
     const clientDestParent = path.join(BUILD_DIR, "lib", "clients", clientSrcLeaf);
     // - mkdir
     fse.mkdirSync(clientDestParent);

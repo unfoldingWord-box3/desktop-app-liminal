@@ -1,6 +1,7 @@
 #USAGE
 
-Run the server: `start /%%APP_NAME%%`
+Run the server: `.\%%APP_NAME%%`
+(Or double-click `%%APP_NAME%%` in Windows File Explorer)
 
 Then connect to http://localhost:8000
 
