@@ -14,7 +14,7 @@
       "src": "../../../pithekos/templates"
     },
     {
-      "src": "../../../pithekos/setup"
+      "src": "../buildResources/setup"
     }
   ],
   "libClients": [
