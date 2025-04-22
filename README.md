@@ -27,31 +27,41 @@ npm run build
 
 You also need to build pankosmia_web:
 # In pankosmia_web repo, NOT this repo!
+Linux:
 ```text
 cargo build
 ```
+Windows:
+```text
+cargo build --release
+```
 
-## Installing the builder
+## Installing the builder (back to _this_ repo!)
 **This is at the root of the repo**
 ```text
 npm install
 ```
 
-## Building for Linux
+## Building
+Linux:
 ```text
 cd linux/build/scripts
 node build.js
 ```
-
-You can bundle up the built linux project as a tgz file with the following incantation from the `build` directory.
-```text
-tar cfz ../../releases/linux/liminal.tgz .
-```
-
-## Building for Windows (untested and almost certainly broken)
+Windows:
 ```text
 cd windows/build/scripts
 node build.js
 ```
 
-We need a Windows equivalent to a linux tgz file for bundling (zip?).
+## Bundling
+You can bundle up the built project with the following incantation from the `build` directory.
+
+Linux (tgz):
+```text
+tar cfz ../../releases/linux/liminal.tgz .
+```
+Windows Powershell (zip):
+```text
+Compress-Archive * ../../releases/windows/liminal.zip
+```
