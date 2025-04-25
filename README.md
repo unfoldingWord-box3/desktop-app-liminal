@@ -46,23 +46,23 @@ npm install
 ## Building
 Linux:
 ```text
-cd linux/build/scripts
+cd linux/scripts
 node build.js
 ```
 Windows:
 ```text
-cd windows/build/scripts
+cd windows/scripts
 node build.js
 ```
 
 ## Bundling
-You can bundle up the built project with the following incantation from the `build` directory.
+You can bundle up the built project with the following incantation **from the `build` directory**.
 
 Linux (tgz):
 ```text
 tar cfz ../../releases/linux/liminal.tgz .
 ```
-Windows Powershell (zip):
+Windows Powershell (zip) -- Delete the existing liminal.zip, then:
 ```text
 Compress-Archive * ../../releases/windows/liminal.zip
 ```
