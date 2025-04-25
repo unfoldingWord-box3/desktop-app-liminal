@@ -11,6 +11,9 @@
       "path": "%%PANKOSMIADIR%%/core-client-remote-repos"
     },
     {
+      "path": "%%PANKOSMIADIR%%/core-client-content"
+    },
+    {
       "path": "%%PANKOSMIADIR%%/core-client-workspace"
     },
     {
