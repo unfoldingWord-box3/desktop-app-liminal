@@ -1,17 +1,20 @@
 {
   "app": {
     "name": "liminal",
-    "version": "0.1.0"
+    "version": "0.2.2"
   },
   "bin": {
     "src": "../../../pankosmia-web/target/release/pankosmia_web"
   },
   "lib": [
     {
-      "src": "../../../pithekos/webfonts"
+      "src": "../../../pankosmia-web/app_resources"
     },
     {
-      "src": "../../../pithekos/templates"
+      "src": "../../../pankosmia-web/webfonts"
+    },
+    {
+      "src": "../../../pankosmia-web/templates"
     },
     {
       "src": "../buildResources/setup"
