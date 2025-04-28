@@ -62,7 +62,8 @@ Linux (tgz):
 ```text
 tar cfz ../../releases/linux/liminal.tgz .
 ```
-Windows Powershell (zip) -- Delete the existing liminal.zip, then:
+Windows Powershell (zip):
 ```text
 Compress-Archive * ../../releases/windows/liminal.zip
 ```
+(Delete /releases/windows/liminal.zip first, if it already exists.)
