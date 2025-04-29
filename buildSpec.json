@@ -26,6 +26,7 @@
     "../../../core-client-remote-repos",
     "../../../core-client-content",
     "../../../core-client-workspace",
+    "../../../xenizo-parallel-gospels",
     "../../../core-client-i18n-editor"
   ]
 }
