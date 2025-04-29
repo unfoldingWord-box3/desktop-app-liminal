@@ -2,7 +2,7 @@
 A Pankosmia App
 
 ## Ecosystem setup and configuration
-This repo pulls together several libraries and projects into a single app. The projects are spread across several repos to allow modular reuse. The sanest way to get this working is to install the repos with the following structure:
+This repo pulls together several libraries and projects into a single app. The projects are spread across several repos to allow modular reuse. The sanest way to get this working is to install [the repos](https://github.com/pankosmia/repositories) with the following structure:
 
 ```
 pankosmia
@@ -14,6 +14,7 @@ pankosmia
 -- core-client-workspace repository
 -- core-client-content repository
 -- core-client-remote-repos repository
+-- xenizo-parallel-gospels
 -- core-client-i18n-editor repository
 ```
 
