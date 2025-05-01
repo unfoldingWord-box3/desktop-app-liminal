@@ -72,5 +72,5 @@ Compress-Archive * ../../releases/windows/liminal-windows.zip
 
 MacOS (zip):
 ```text
-zip -r ../../releases/windows/liminal-windows.zip *
+zip -r ../../releases/macos/liminal-macos.zip *
 ```
