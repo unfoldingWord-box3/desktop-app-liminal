@@ -19,7 +19,7 @@ const spec = fse.readJsonSync(path.resolve(SPEC_PATH));
 const APP_NAME = spec['app']['name'];
 // Copy and rename launcher script
 fse.copySync(
-    path.join(MACOS_BUILD_RESOURCES, "appLauncher.bsh"),
+    path.join(MACOS_BUILD_RESOURCES, "appLauncher.zsh"),
     path.join(BUILD_DIR, APP_NAME)
 );
 // Copy and customize README
