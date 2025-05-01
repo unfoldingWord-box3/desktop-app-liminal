@@ -29,11 +29,7 @@ npm run build
 
 You also need to build pankosmia_web:
 # In pankosmia_web repo, NOT this repo!
-Linux:
-```text
-cargo build
-```
-Windows:
+Linux, Windows, or MacOS:
 ```text
 cargo build --release
 ```
@@ -55,16 +51,26 @@ Windows:
 cd windows/scripts
 node build.js
 ```
-
+MacOS:
+```text
+cd macos/scripts
+node build.js
+```
 ## Bundling
 You can bundle up the built project with the following incantation **from the `build` directory**.
 
 Linux (tgz):
 ```text
-tar cfz ../../releases/linux/liminal.tgz .
+tar cfz ../../releases/linux/liminal-linux.tgz .
 ```
+
 Windows Powershell (zip):
 ```text
-Compress-Archive * ../../releases/windows/liminal.zip
+Compress-Archive * ../../releases/windows/liminal-windows.zip
 ```
-(Delete /releases/windows/liminal.zip first, if it already exists.)
+(Delete /releases/windows/liminal-windows.zip first, if it already exists.)
+
+MacOS (zip):
+```text
+zip -r ../../releases/windows/liminal-windows.zip *
+```
