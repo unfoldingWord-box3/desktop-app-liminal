@@ -12,7 +12,7 @@ To upgrade:
 7. Type the following then enter:
      ./liminal.zsh
 8. This will lead to a message saying "server.bin" Not Opened
-9. Go to System Preference > General > and at the bottom, after "server.bin" was blocked from use, click "Allow Anyway" .
+9. Go to System Preference >  Privacy and Security > General > and at the bottom, after "server.bin" was blocked from use, click "Allow Anyway" .
 10. Wait until that message disappears from the settings page.
 11. Close the "Not Opened" message ("Done")
 12. From the terminal, type the following again then enter:
@@ -34,7 +34,7 @@ First time use (not an upgrade):
 5. Type the following then enter:
      ./liminal.zsh
 6. This will lead to a message saying "server.bin" Not Opened
-7. Go to System Preference > General > and at the bottom, after "server.bin" was blocked from use, click "Allow Anyway" .
+7. Go to System Preference > Privacy and Security > General > and at the bottom, after "server.bin" was blocked from use, click "Allow Anyway" .
 8. Wait until that message disappears from the settings page.
 9. Close the "Not Opened" message ("Done")
 10. From the terminal, type the following again then enter:
