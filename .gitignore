@@ -1,8 +1,7 @@
 .idea/
 linux/build/
 windows/build/
-releases/linux/liminal.tgz
-releases/windows/liminal.zip
+macos/build/
 
 # Logs
 logs
