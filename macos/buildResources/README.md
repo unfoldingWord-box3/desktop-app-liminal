@@ -11,11 +11,17 @@ To upgrade:
      cd Desktop/liminal-macos
 7. Type the following then enter:
      ./liminal.zsh
-8. Watch following load in the terminal window:
+8. This will lead to a message saying "server.bin" Not Opened
+9. Go to System Preference > General > and at the bottom, after "server.bin" was blocked from use, click "Allow Anyway" .
+10. Wait until that message disappears from the settings page.
+11. Close the "Not Opened" message ("Done")
+12. From the terminal, type the following again then enter:
+     ./liminal.zsh
+13. Watch following load in the terminal window:
      OS = 'macos'
      Rocket has launched from http://127.0.0.1:8000
-9. Restore backup from step 1 to `~/panksomia_working/repos`
-10. Launch Firefox (or an alternate web browser), then direct it to the address above, or to:
+14. Restore backup from step 1 to `~/panksomia_working/repos`
+15. Launch Firefox (or an alternate web browser), then direct it to the address above, or to:
      http://localhost:8000
 
 First time use (not an upgrade):
@@ -27,10 +33,16 @@ First time use (not an upgrade):
      cd Desktop/liminal-macos
 5. Type the following then enter:
      ./liminal.zsh
-6. Watch following load in the terminal window:
+6. This will lead to a message saying "server.bin" Not Opened
+7. Go to System Preference > General > and at the bottom, after "server.bin" was blocked from use, click "Allow Anyway" .
+8. Wait until that message disappears from the settings page.
+9. Close the "Not Opened" message ("Done")
+10. From the terminal, type the following again then enter:
+     ./liminal.zsh
+11. Watch following load in the terminal window:
      OS = 'macos'
      Rocket has launched from http://127.0.0.1:8000
-7. Launch Firefox (or an alternate web browser), then direct it to the address above, or to:
+12. Launch Firefox (or an alternate web browser), then direct it to the address above, or to:
      http://localhost:8000
 
 Best viewed with a Graphite-enabled browser such as Firefox.

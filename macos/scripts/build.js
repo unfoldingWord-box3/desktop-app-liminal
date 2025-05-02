@@ -20,7 +20,7 @@ const APP_NAME = spec['app']['name'];
 // Copy and rename launcher script
 fse.copySync(
     path.join(MACOS_BUILD_RESOURCES, "appLauncher.zsh"),
-    path.join(BUILD_DIR, APP_NAME)
+    path.join(BUILD_DIR, APP_NAME + ".zsh")
 );
 // Copy and customize README
 const readMe = fse.readFileSync(path.join(MACOS_BUILD_RESOURCES, "README.md"))

@@ -72,5 +72,6 @@ Compress-Archive * ../../releases/windows/liminal-windows.zip
 
 MacOS (zip):
 ```text
+chmod 755 liminal.zsh
 zip -r ../../releases/macos/liminal-macos.zip *
 ```
