@@ -13,7 +13,7 @@ To upgrade:
 7. Type the following then enter:
      ./liminal.zsh
 8. This will lead to a message saying "server.bin" Not Opened
-9. Click "Done".
+9. Click either "Done" or "Cancel", depending on which of those options you have.
 10. Go to Apple menu > System Preference >  Privacy and Security > General > and at the bottom, after "server.bin" was blocked, click "Allow Anyway" .
 11. Wait until the "server.bin was blocked" message disappears from the settings page.
 12. In the terminal type the following again then enter:
@@ -36,7 +36,7 @@ First time use (not an upgrade):
 5. Type the following then enter:
      ./liminal.zsh
 6. This will lead to a message saying "server.bin" Not Opened
-7. Click "Done".
+7. Click either "Done" or "Cancel", depending on which of those options you have.
 8. Go to Apple menu > System Preference >  Privacy and Security > General > and at the bottom, after "server.bin" was blocked, click "Allow Anyway" .
 9. Wait until the "server.bin was blocked" message disappears from the settings page.
 10. In the terminal type the following again then enter:
