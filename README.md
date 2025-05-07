@@ -61,21 +61,32 @@ cd macos/scripts
 node build.js
 ```
 ## Bundling
-You can bundle up the built project with the following incantation **from the `build` directory**.
+You can bundle up the built project with the following incantation:
 
 Linux (tgz):
 ```text
+cd ../build
 tar cfz ../../releases/linux/liminal-linux.tgz .
 ```
 
-Windows Powershell (zip):
-```text
-Compress-Archive * ../../releases/windows/liminal-windows.zip
-```
-(Delete /releases/windows/liminal-windows.zip first, if it already exists.)
-
 MacOS (zip):
 ```text
+cd ../build
 chmod 755 liminal.zsh
 zip -r ../../releases/macos/liminal-macos.zip *
 ```
+Windows Powershell (exe):
+1. Install [Inno Setup](https://jrsoftware.org/isdl.php) -tested with v6.4.3
+2. In powershell, enter the following where where 0.2.7 is the new version number:
+```text
+cd ../install
+$env:APP_VERSION = "0.2.7"
+.\makeInstall.bat
+```
+
+Or, if you really want a windows zip file -- Windows Powershell (zip):
+```text
+cd ../build
+Compress-Archive * ../../releases/windows/liminal-windows.zip
+```
+(Delete /releases/windows/liminal-windows.zip first, if it already exists.)
