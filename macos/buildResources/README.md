@@ -18,12 +18,12 @@ To upgrade:
 11. Wait until the "server.bin was blocked" message disappears from the settings page.
 12. In the terminal type the following again then enter:
      ./liminal.zsh
-13. Watch following load in the terminal window:
+    Watch following load in the terminal window:
      OS = 'macos'
      Rocket has launched from http://127.0.0.1:8000
-14. Restore backup from step 1 to `~/panksomia_working/repos`
-15. Launch Firefox (or an alternate web browser), then direct it to the address above, or to:
-     http://localhost:8000
+    This will also launch http://localhost:8000 in Firefox (if available) or in your default web browser.
+13. Restore backup from step 1 to `~/panksomia_working/repos`
+14. Reconnect to http://localhost:8000 from Firefox (or an alternate web browser) as needed.
 
 First time use (not an upgrade):
 
@@ -41,10 +41,10 @@ First time use (not an upgrade):
 9. Wait until the "server.bin was blocked" message disappears from the settings page.
 10. In the terminal type the following again then enter:
      ./liminal.zsh
-11. Watch following load in the terminal window:
+    Watch following load in the terminal window:
      OS = 'macos'
      Rocket has launched from http://127.0.0.1:8000
-12. Launch Firefox (or an alternate web browser), then direct it to the address above, or to:
-     http://localhost:8000
+    This will also launch http://localhost:8000 in Firefox (if available) or in your default web browser.
+11. Reconnect to http://localhost:8000 from Firefox (or an alternate web browser) as needed.
 
 Best viewed with a Graphite-enabled browser such as Firefox.
