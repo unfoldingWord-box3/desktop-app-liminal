@@ -10,11 +10,12 @@
    [Files]
    Source: "..\build\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
    Source: "..\buildResources\appLauncher.bat"; DestDir: "{app}"; Flags: ignoreversion
-   Source: "..\buildResources\README.md"; DestDir: "{app}"; Flags: ignoreversion
+   Source: "..\buildResources\README.txt"; DestDir: "{app}"; Flags: ignoreversion
 
    [Icons]
    Name: "{group}\Liminal"; Filename: "{app}\appLauncher.bat"
    Name: "{userdesktop}\Liminal"; Filename: "{app}\appLauncher.bat"; Tasks: desktopicon
+    Name: "{userdesktop}\Liminal README"; Filename: "{app}\README.txt"; Tasks: desktopicon
    Name: "{group}\Uninstall Liminal (Delete App Files)"; Filename: "{uninstallexe}"; Parameters: "/DELETE /ALLFILES"
 
    [Run]
