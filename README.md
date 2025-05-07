@@ -29,9 +29,13 @@ npm run build
 
 You also need to build pankosmia_web:
 # In pankosmia_web repo, NOT this repo!
-Linux, Windows, or MacOS:
+Linux or Windows:
 ```text
 cargo build --release
+```
+MacOS:
+```text
+OPENSSL_STATIC=yes cargo build --release
 ```
 
 ## Installing the builder (back to _this_ repo!)
