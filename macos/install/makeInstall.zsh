@@ -22,6 +22,8 @@ chmod 555 ../project/payload/Liminal.app/Contents/MacOS/liminal.zsh
 mkdir -p ../project/payload/Liminal.app/Contents/Resources
 cp ../buildResources/README.md ../project/payload/Liminal.app/Contents/Resources/README.md
 
+cp ../buildResources/Info.plist ../project/payload/Liminal.app/Contents/
+
 cp -R ./bin ../project/payload/Liminal.app/Contents/
 chmod 755 ../project/payload/Liminal.app/Contents/bin/server.bin
 
