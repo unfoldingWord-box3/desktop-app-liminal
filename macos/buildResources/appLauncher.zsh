@@ -6,6 +6,8 @@ if [ -e ./bin/server.bin ]; then
     BASE="."
 elif [ -e ../bin/server.bin ]; then
     BASE=".."
+elif [ -e ./Contents/bin/server.bin ]; then
+    BASE="./Contents"
 else
     echo "Error: server.bin not found in ./bin or ../bin"
     exit 1
