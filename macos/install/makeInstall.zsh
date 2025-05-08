@@ -3,6 +3,8 @@
 # environment variable must be set
 #   for example do `export APP_VERSION="0.2.7"` before calling script
 
+# requires shc - do `brew install shc`
+
 # Check if APP_VERSION environment variable is set
 if [ -z "$APP_VERSION" ]; then
     echo "Error: APP_VERSION environment variable is not set."
@@ -22,12 +24,14 @@ set -x
 rm -rf ../project
 
 mkdir -p ../project/payload/Liminal.app/Contents/MacOS
-cp ../buildResources/appLauncher.sh ../project/payload/Liminal.app/Contents/MacOS/liminal.sh
-chmod 555 ../project/payload/Liminal.app/Contents/MacOS/liminal.sh
+shc -f ../buildResources/appLauncher.sh -o ../project/payload/Liminal.app/Contents/MacOS/startLiminal
+#cp ../buildResources/appLauncher.sh ../project/payload/Liminal.app/Contents/MacOS/liminal.sh
+chmod 555 ../project/payload/Liminal.app/Contents/MacOS/startLiminal
 
 mkdir -p ../project/payload/Liminal.app/Contents/Resources
 cp ../buildResources/README.md ../project/payload/Liminal.app/Contents/Resources/README.md
 
+# add APP_VERSION to Info.plist
 cp ../buildResources/Info.plist ../project/payload/Liminal.app/Contents/
 PLIST_FILE="../project/payload/Liminal.app/Contents//Info.plist"
 

@@ -17,8 +17,10 @@ fi
 URL="http://localhost:8000"
 if [ -e /Applications/Firefox.app ]
 then
+    echo "Launching Firefox"
     open -a firefox -g "$URL" &
 else
+    echo "Launching Default browser"
     open "$URL" &
 fi
 

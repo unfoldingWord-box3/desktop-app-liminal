@@ -7,10 +7,6 @@
 	<key>CFBundleVersion</key>
 	<string>${APP_VERSION}</string>
 	<key>CFBundleExecutable</key>
-	<string>liminal.sh</string>
-	<key>CFBundleIdentifier</key>
-	<string>org.pankosmia.liminal</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>startLiminal</string>
 </dict>
 </plist>
