@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/sh
 
 clear
 # Check for server.bin in ./bin first, then ../bin
@@ -13,13 +13,7 @@ else
     exit 1
 fi
 
-echo "bin folder found at ${BASE}"
-echo "Launch a web browser and enter http://localhost:8000"
-echo "(Best viewed with a Graphite-enabled browser such as Firefox.)"
-echo " "
-export APP_RESOURCES_DIR=${BASE}/lib/
-${BASE}/bin/server.bin &
-
+# launch browser
 URL="http://localhost:8000"
 if [ -e /Applications/Firefox.app ]
 then
@@ -27,3 +21,12 @@ then
 else
     open "$URL" &
 fi
+
+
+echo "bin folder found at $BASE"
+echo "Launch a web browser and enter http://localhost:8000"
+echo "(Best viewed with a Graphite-enabled browser such as Firefox.)"
+echo " "
+cd $BASE
+export APP_RESOURCES_DIR=./lib/
+./bin/server.bin

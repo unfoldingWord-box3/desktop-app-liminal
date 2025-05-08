@@ -3,6 +3,12 @@
 # environment variable must be set
 #   for example do `export APP_VERSION="0.2.7"` before calling script
 
+# Check if APP_VERSION environment variable is set
+if [ -z "$APP_VERSION" ]; then
+    echo "Error: APP_VERSION environment variable is not set."
+    exit 1
+fi
+
 rm -f ../../releases/macos/liminal_installer_*.pkg
 
 cd ../build
@@ -16,13 +22,29 @@ set -x
 rm -rf ../project
 
 mkdir -p ../project/payload/Liminal.app/Contents/MacOS
-cp ../buildResources/appLauncher.zsh ../project/payload/Liminal.app/Contents/MacOS/liminal.zsh
-chmod 555 ../project/payload/Liminal.app/Contents/MacOS/liminal.zsh
+cp ../buildResources/appLauncher.sh ../project/payload/Liminal.app/Contents/MacOS/liminal.sh
+chmod 555 ../project/payload/Liminal.app/Contents/MacOS/liminal.sh
 
 mkdir -p ../project/payload/Liminal.app/Contents/Resources
 cp ../buildResources/README.md ../project/payload/Liminal.app/Contents/Resources/README.md
 
 cp ../buildResources/Info.plist ../project/payload/Liminal.app/Contents/
+PLIST_FILE="../project/payload/Liminal.app/Contents//Info.plist"
+
+# Check if the file exists
+if [ ! -f "$PLIST_FILE" ]; then
+    echo "Error: $PLIST_FILE does not exist."
+    exit 1
+fi
+
+# Replace all occurrences of ${APP_VERSION} with the value of the APP_VERSION variable
+sed -i.bak "s/\${APP_VERSION}/$APP_VERSION/g" "$PLIST_FILE"
+
+# Print success message
+echo "Replaced \${APP_VERSION} with \"$APP_VERSION\" in $PLIST_FILE."
+#echo "Backup of original file saved as $PLIST_FILE.bak"
+#remove backup
+rm $PLIST_FILE.bak
 
 cp -R ./bin ../project/payload/Liminal.app/Contents/
 chmod 755 ../project/payload/Liminal.app/Contents/bin/server.bin
@@ -41,7 +63,7 @@ pkgbuild \
   --identifier com.yourdomain.liminal \
   --version ${APP_VERSION} \
   --install-location /Applications \
-  ./project/liminal_installer_${APP_VERSION}.pkg
+  ./build/liminal_installer_${APP_VERSION}.pkg
 
 # copy to releases folder
-cp ./project/liminal_installer_${APP_VERSION}.pkg ../releases/macos/
+cp ./build/liminal_installer_${APP_VERSION}.pkg ../releases/macos/
