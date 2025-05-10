@@ -1,6 +1,10 @@
 #!/bin/sh
 
-clear
+echo "========================"
+echo "Liminal starting up:"
+echo "Current folder:"
+pwd
+
 # Check for server.bin in ./bin first, then ../bin
 if [ -e ./bin/server.bin ]; then
     BASE="."
@@ -8,8 +12,11 @@ elif [ -e ../bin/server.bin ]; then
     BASE=".."
 elif [ -e ./Contents/bin/server.bin ]; then
     BASE="./Contents"
+elif [ -e /Applications/Liminal.app/Contents/bin/server.bin ]; then
+    BASE="/Applications/Liminal.app/Contents"
 else
     echo "Error: server.bin not found in ./bin or ../bin"
+    read -p "Press Enter to continue..."
     exit 1
 fi
 
@@ -32,3 +39,5 @@ echo " "
 cd $BASE
 export APP_RESOURCES_DIR=./lib/
 ./bin/server.bin
+
+read -p "Press Enter to continue..."

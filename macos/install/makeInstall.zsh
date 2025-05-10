@@ -24,6 +24,7 @@ set -x
 rm -rf ../project
 
 mkdir -p ../project/payload/Liminal.app/Contents/MacOS
+rm -f ../buildResources/appLauncher.sh.x.c
 shc -f ../buildResources/appLauncher.sh -o ../project/payload/Liminal.app/Contents/MacOS/startLiminal
 #cp ../buildResources/appLauncher.sh ../project/payload/Liminal.app/Contents/MacOS/liminal.sh
 chmod 555 ../project/payload/Liminal.app/Contents/MacOS/startLiminal
