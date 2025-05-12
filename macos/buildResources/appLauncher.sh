@@ -2,21 +2,39 @@
 
 echo "========================"
 echo "Liminal starting up:"
-echo "Current folder:"
+echo "Current directory:"
 pwd
 
-# Check for server.bin in ./bin first, then ../bin
-if [ -e ./bin/server.bin ]; then
+# find the directory path that contains this script
+script_dir="$(dirname "$(realpath "$0")")"
+echo "Script directory: $script_dir"
+
+# ============================
+# need to find server.bin - this is needed because working directory is not set
+
+# first start from directory script is in
+if [ -e $script_dir/../bin/server.bin ]; then
+    BASE="$script_dir/.."
+
+# Otherwise Check for server.bin in ./bin
+elif [ -e ./bin/server.bin ]; then
     BASE="."
+
+# Otherwise Check for server.bin in ../bin
 elif [ -e ../bin/server.bin ]; then
     BASE=".."
+
+# Otherwise Check for server.bin in ./Contents/bin
 elif [ -e ./Contents/bin/server.bin ]; then
     BASE="./Contents"
+
+# finally fall back to default install path
 elif [ -e /Applications/Liminal.app/Contents/bin/server.bin ]; then
     BASE="/Applications/Liminal.app/Contents"
+
+# not found
 else
     echo "Error: server.bin not found in ./bin or ../bin"
-    read -p "Press Enter to continue..."
     exit 1
 fi
 
@@ -39,5 +57,3 @@ echo " "
 cd $BASE
 export APP_RESOURCES_DIR=./lib/
 ./bin/server.bin
-
-read -p "Press Enter to continue..."
