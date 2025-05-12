@@ -10,7 +10,7 @@ const SPEC_PATH = path.resolve('../../buildSpec.json');
 const WINDOWS_BUILD_RESOURCES = path.resolve("../buildResources");
 // Delete build dir if it exists
 if (fse.existsSync(BUILD_DIR)) {
-    fse.rmSync(BUILD_DIR, { recursive: true, force: true });
+    fse.rmSync(BUILD_DIR, {recursive: true, force: true});
 }
 // Make build directory
 fse.mkdirSync(BUILD_DIR);
@@ -23,11 +23,11 @@ fse.copySync(
     path.join(BUILD_DIR, APP_NAME)
 );
 // Copy and customize README
-const readMe = fse.readFileSync(path.join(WINDOWS_BUILD_RESOURCES, "README.md"))
+const readMe = fse.readFileSync(path.join(WINDOWS_BUILD_RESOURCES, "README.txt"))
     .toString()
     .replace(/%%APP_NAME%%/g, APP_NAME);
 fse.writeFileSync(
-    path.join(BUILD_DIR, "README.md"),
+    path.join(BUILD_DIR, "README.txt"),
     readMe
 );
 // Make bin directory
@@ -39,19 +39,45 @@ fse.copySync(
     path.join(BUILD_DIR, "bin", "server.exe")
 );
 // Make lib directory
-fse.mkdirSync(path.join(BUILD_DIR, "lib"));
+const libDirPath = path.join(BUILD_DIR, "lib");
+fse.mkdirSync(libDirPath);
 // Copy lib directories
-for (const libSrc of spec['lib'].map(s => path.resolve(s.src))) {
-    const srcLeaf = libSrc.split("\\").reverse()[0];
-    copyDir(
-        libSrc,
-        path.join(BUILD_DIR, "lib", srcLeaf),
+for (
+    const libSpec of spec['lib']
+    .map(
+        s => {
+            return {
+                src: path.resolve(s.src),
+                dest: path.join(libDirPath, s.targetName)
+            }
+        }
+    )
+    ) {
+    copyDir.sync(
+        libSpec.src,
+        path.join(libSpec.dest),
         {}
     );
 }
+// Patch i18n
+const builtI18nPath = path.join(BUILD_DIR, "lib", "templates", "i18n.json");
+const i18nJson = fse.readJsonSync(builtI18nPath);
+const i18nPatchPath = path.resolve("../../globalBuildResources/i18nPatch.json");
+const patchJson = fse.readJsonSync(i18nPatchPath);
+for ([level1, level1Values] of Object.entries(patchJson)) {
+    for ([level2, level2Values] of Object.entries(level1Values)) {
+        for ([level3, payload] of Object.entries(level2Values)) {
+            if (!i18nJson[level1] || !i18nJson[level1][level2] || !i18nJson[level1][level2][level3]) {
+                throw new Error(`Trying to patch i18n for '${level1}/${level2}/${level3}' which does not exist in i18n template`);
+            }
+            i18nJson[level1][level2][level3] = payload;
+        }
+    }
+}
+fse.writeJsonSync(builtI18nPath, i18nJson);
 // Make lib/clients
 fse.mkdirSync(path.join(BUILD_DIR, "lib", "clients"));
-// Copy clients:
+// Copy clients and, optionally, favicon:
 for (const libClientSrc of spec['libClients'].map(s => path.resolve(s))) {
     const clientSrcLeaf = libClientSrc.split("\\").reverse()[0];
     const clientDestParent = path.join(BUILD_DIR, "lib", "clients", clientSrcLeaf);
@@ -68,9 +94,23 @@ for (const libClientSrc of spec['libClients'].map(s => path.resolve(s))) {
         path.join(clientDestParent, "pankosmia_metadata.json")
     );
     // - client build/
-    copyDir(
+    copyDir.sync(
         path.join(libClientSrc, "build"),
         path.join(clientDestParent, "build"),
         {}
+    );
+    // - maybe favicon
+    if (spec.favIcon) {
+        fse.copySync(
+            path.resolve(spec.favIcon),
+            path.join(clientDestParent, "build", "favicon.ico")
+        );
+    }
+}
+// Maybe theme
+if (spec.theme) {
+    fse.copySync(
+        path.resolve(spec.theme),
+        path.join(BUILD_DIR, "lib", "app_resources", "themes", "default.json")
     );
 }
