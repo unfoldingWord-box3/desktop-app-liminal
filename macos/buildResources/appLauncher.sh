@@ -12,7 +12,7 @@ echo "Script directory: $script_dir"
 # ============================
 # need to find server.bin - this is needed because working directory is not set
 
-# first start from directory script is in
+# first look for server.bin relative to directory script is in
 if [ -e $script_dir/../bin/server.bin ]; then
     BASE="$script_dir/.."
 
