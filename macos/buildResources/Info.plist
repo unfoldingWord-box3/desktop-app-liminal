@@ -7,6 +7,6 @@
 	<key>CFBundleVersion</key>
 	<string>${APP_VERSION}</string>
 	<key>CFBundleExecutable</key>
-	<string>startLiminal</string>
+	<string>startLiminal.sh</string>
 </dict>
 </plist>

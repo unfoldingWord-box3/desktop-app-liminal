@@ -24,10 +24,13 @@ set -x
 rm -rf ../project
 
 mkdir -p ../project/payload/Liminal.app/Contents/MacOS
-rm -f ../buildResources/appLauncher.sh.x.c
-shc -f ../buildResources/appLauncher.sh -o ../project/payload/Liminal.app/Contents/MacOS/startLiminal
-#cp ../buildResources/appLauncher.sh ../project/payload/Liminal.app/Contents/MacOS/liminal.sh
-chmod 555 ../project/payload/Liminal.app/Contents/MacOS/startLiminal
+
+# convert shell script to app
+#rm -f ../buildResources/appLauncher.sh.x.c
+#shc -f ../buildResources/appLauncher.sh -o ../project/payload/Liminal.app/Contents/MacOS/startLiminal
+#chmod 555 ../project/payload/Liminal.app/Contents/MacOS/startLiminal
+
+cp ../buildResources/appLauncher.sh ../project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
 
 mkdir -p ../project/payload/Liminal.app/Contents/Resources
 cp ../buildResources/README.md ../project/payload/Liminal.app/Contents/Resources/README.md
