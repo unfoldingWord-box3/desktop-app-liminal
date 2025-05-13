@@ -11,15 +11,24 @@ if [ -z "$APP_VERSION" ]; then
     exit 1
 fi
 
+# Turn on command echo
+set -x
+
 rm -f ../../releases/macos/liminal_installer_*.pkg
+
+# set read permission on all files
+chmod -R u+r,g+r,o+r ../build
+
+# set execute permissions on all folders
+find ../build -type d -exec chmod u+rx,g+rx,o+rx {} +
 
 cd ../build
 
+# set execute permissions on application executable
+chmod u+x,g+x,o+x ./bin/server.bin
+
 ########################################
 # build folder structure for package
-
-# Turn on command echo
-set -x
 
 rm -rf ../project
 
