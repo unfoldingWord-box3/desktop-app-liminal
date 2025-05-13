@@ -1,13 +1,8 @@
-#!/usr/bin/env bash
-
-set -e
-set -u
-
 if [ ! -f ../../local_server/target/debug/local_server ]; then
     echo "Building local server"
     cd ../../local_server
     cargo build --release
-    cd ../linux/scripts
+    cd ../windows/scripts
 fi
 
 echo "Assembling build environment"
@@ -15,4 +10,4 @@ node ./build.js
 
 echo "Running..."
 cd ../build
-./liminal
+./liminal.bat
