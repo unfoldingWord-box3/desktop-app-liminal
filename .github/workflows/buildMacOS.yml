@@ -20,13 +20,13 @@ jobs:
         run: ./makeAllInstalls.sh
 
       - name: Upload arm64 artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: macos-arm64-build
           path: macos/release/arm64
 
       - name: Upload intel64 artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: macos-intel64-build
           path: macos/release/intel64
