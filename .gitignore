@@ -140,3 +140,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 macos/project/
+/macos/release/

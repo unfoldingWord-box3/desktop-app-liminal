@@ -1,0 +1,25 @@
+name: Run makeInstall.sh on macOS 13
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-make-install:
+    runs-on: macos-13  # Specify macOS version 13
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Grant execute permissions for the shell script
+      - name: Make script executable
+        run: chmod +x ./macos/install/makeAllInstalls.sh
+
+      - name: Run makeAllInstalls.sh
+        run: ./macos/install/makeAllInstalls.sh
