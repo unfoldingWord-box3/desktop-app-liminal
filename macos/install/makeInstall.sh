@@ -11,6 +11,8 @@ if [ -z "$APP_VERSION" ]; then
     exit 1
 fi
 
+arch="$1"
+
 rm -f ../../releases/macos/liminal_installer_*.pkg
 
 cd ../build || exit 1
@@ -71,7 +73,7 @@ pkgbuild \
   --identifier com.yourdomain.liminal \
   --version "$APP_VERSION" \
   --install-location /Applications \
-  ./build/liminal_installer_${APP_VERSION}.pkg
+  ./build/liminal_installer_${arch}_${APP_VERSION}.pkg
 
 # copy to releases folder
-cp ./build/liminal_installer_${APP_VERSION}.pkg ../releases/macos/
+cp ./build/liminal_installer_${arch}_${APP_VERSION}.pkg ../releases/macos/

@@ -1,14 +1,15 @@
 #!/bin/sh
 
 # Check if filename and destination are provided as an argument
-if [ -z "$2" ]; then
-  echo "Usage: $0 <filename> <destination>"
+if [ -z "$3" ]; then
+  echo "Usage: $0 <filename> <destination-folder> <arch>"
   exit 1
 fi
 
 # get arguments
 filename="$1"
-destination="$2"
+destination="$2/$3"
+arch="$3"
 
 echo "Processing '$filename'"
 
@@ -38,7 +39,7 @@ rm -rf ../build
 mkdir -p ../build
 cp -R "$TEMP_DIR"/* ../build/
 
-./makeInstall.sh
+./makeInstall.sh $arch
 
 rm -rf "$destination"
 mkdir -p "$destination"
