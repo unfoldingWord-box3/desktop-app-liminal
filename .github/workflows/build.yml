@@ -16,4 +16,5 @@ jobs:
         run: chmod +x ./macos/install/makeAllInstalls.sh
 
       - name: Run makeAllInstalls.sh
-        run: ./macos/install/makeAllInstalls.sh
+        working-directory: ./macos/install
+        run: ./makeAllInstalls.sh
