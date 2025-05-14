@@ -19,21 +19,29 @@ jobs:
         working-directory: ./macos/install
         run: ./makeAllInstalls.sh
 
-      - name: show Installs
+      - name: get Installer names
         run: |
-          ls -als .
-          ls -als ./macos/release/
-          ls -als ./macos/release/arm64/
-      
+          echo "Arm install:"
+          ls -als ./macos/release/arm64/*.pkg
+          cd ./macos/release/arm64
+          echo "PKG_NAME_ARM=$(ls *.pkg | head -n 1)" >> $GITHUB_ENV
+          ch ../../..
+          
+          echo "Intel install:"
+          ls -als ./macos/release/intel64/*.pkg
+          cd ./macos/release/intel64
+          echo "PKG_NAME_INTEL=$(ls *.pkg | head -n 1)" >> $GITHUB_ENV
+          ch ../../..
+
       - name: Upload arm64 artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: macos-arm64-build
-          path: ./macos/release/arm64/*.pkg
+          name: ${{ env.PKG_NAME_ARM }}
+          path: ./macos/release/arm64/${{ env.PKG_NAME_ARM }}
 
       - name: Upload intel64 artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: macos-intel64-build
-          path: ./macos/release/intel64/*.pkg
+          name: ${{ env.PKG_NAME_INTEL }}
+          path: ./macos/release/intel64/${{ env.PKG_NAME_INTEL }}
 
