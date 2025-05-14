@@ -16,11 +16,10 @@ jobs:
         run: chmod +x ./macos/install/makeAllInstalls.sh
 
       - name: Run makeAllInstalls.sh
-        working-directory: ~/macos/install
+        working-directory: ./macos/install
         run: ./makeAllInstalls.sh
 
       - name: show Installs
-        working-directory: ~
         run: |
           ls -als .
           ls -als ./macos/release/
