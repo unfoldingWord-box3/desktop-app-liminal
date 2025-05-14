@@ -1,0 +1,47 @@
+name: Run makeInstall.sh on macOS 13
+
+on: [push, pull_request]
+
+jobs:
+  run-make-install:
+    runs-on: macos-13  # Specify macOS version 13
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Grant execute permissions for the shell script
+      - name: Make script executable
+        run: chmod +x ./macos/install/makeAllInstalls.sh
+
+      - name: Run makeAllInstalls.sh
+        working-directory: ./macos/install
+        run: ./makeAllInstalls.sh
+
+      - name: get Installer names
+        run: |
+          echo "Arm install:"
+          ls -als ./macos/release/arm64/*.pkg
+          cd ./macos/release/arm64
+          echo "PKG_NAME_ARM=$(ls *.pkg | head -n 1)" >> $GITHUB_ENV
+          cd ../../..
+          
+          echo "Intel install:"
+          ls -als ./macos/release/intel64/*.pkg
+          cd ./macos/release/intel64
+          echo "PKG_NAME_INTEL=$(ls *.pkg | head -n 1)" >> $GITHUB_ENV
+          cd ../../..
+
+      - name: Upload arm64 artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PKG_NAME_ARM }}
+          path: ./macos/release/arm64/${{ env.PKG_NAME_ARM }}
+
+      - name: Upload intel64 artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PKG_NAME_INTEL }}
+          path: ./macos/release/intel64/${{ env.PKG_NAME_INTEL }}
+
