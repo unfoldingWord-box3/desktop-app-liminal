@@ -25,13 +25,13 @@ jobs:
           ls -als ./macos/release/arm64/*.pkg
           cd ./macos/release/arm64
           echo "PKG_NAME_ARM=$(ls *.pkg | head -n 1)" >> $GITHUB_ENV
-          ch ../../..
+          cd ../../..
           
           echo "Intel install:"
           ls -als ./macos/release/intel64/*.pkg
           cd ./macos/release/intel64
           echo "PKG_NAME_INTEL=$(ls *.pkg | head -n 1)" >> $GITHUB_ENV
-          ch ../../..
+          cd ../../..
 
       - name: Upload arm64 artifacts
         uses: actions/upload-artifact@v4
