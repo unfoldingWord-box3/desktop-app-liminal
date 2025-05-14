@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# Loop through different architectures
+# Loop through creating installs for both arm64 and intel64
 for ARCH in "arm64" "intel64"; do
     echo "Building for architecture: $ARCH"
     
-    # Call makeInstall script
+    # unzip zip the liminal install files and create mac install package
     ./makeInstallFromZip.sh  zips/$ARCH/liminal*.zip ../release/$ARCH
     
     if [ $? -ne 0 ]; then
