@@ -43,3 +43,6 @@ cp -R "$TEMP_DIR"/* ../build/
 rm -rf "$destination"
 mkdir -p "$destination"
 cp ../../releases/macos/liminal_installer_*.pkg "$destination"
+echo "Files at $destination"
+ls -als "$destination/"
+

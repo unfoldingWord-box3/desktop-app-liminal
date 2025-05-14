@@ -16,16 +16,25 @@ jobs:
         run: chmod +x ./macos/install/makeAllInstalls.sh
 
       - name: Run makeAllInstalls.sh
-        working-directory: ./macos/install
+        working-directory: ~/macos/install
         run: ./makeAllInstalls.sh
 
+      - name: show Installs
+        working-directory: ~
+      - run:
+          ls -als .
+          ls -als ./macos/release/
+          ls -als ./macos/release/arm64/
+
       - name: Upload arm64 artifacts
+        working-directory: ~
         uses: actions/upload-artifact@v4
         with:
           name: macos-arm64-build
           path: ./macos/release/arm64/*.zip
 
       - name: Upload intel64 artifacts
+        working-directory: ~
         uses: actions/upload-artifact@v4
         with:
           name: macos-intel64-build
