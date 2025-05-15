@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Loop through creating installs for both arm64 and intel64
-for ARCH in "arm64" "intel64"; do
+for ARCH in "intel64" "arm64"; do
     echo "Building for architecture: $ARCH"
     
     # unzip the liminal install files and create mac install package

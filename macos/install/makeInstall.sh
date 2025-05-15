@@ -32,7 +32,16 @@ mkdir -p ../project/payload/Liminal.app/Contents/MacOS
 #shc -f ../buildResources/appLauncher.sh -o ../project/payload/Liminal.app/Contents/MacOS/startLiminal
 #chmod 555 ../project/payload/Liminal.app/Contents/MacOS/startLiminal
 
-cp ../buildResources/appLauncher.sh ../project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
+## non-electron startup
+# cp ../buildResources/appLauncher.sh ../project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
+
+# electron startup
+cp ../buildResources/appLauncherElectron.sh ../project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
+# copy shared electron files
+cp -R ../buildResources/electron ../project/payload/Liminal.app/Contents/
+# now copy architecture specific electron files
+cp -R ../buildResources/electron.$arch/* ../project/payload/Liminal.app/Contents/electron
+chmod 755 ../project/payload/Liminal.app/Contents/electron/Electron.app/Contents/MacOS/Electron
 
 mkdir -p ../project/payload/Liminal.app/Contents/Resources
 cp ../buildResources/README.md ../project/payload/Liminal.app/Contents/Resources/README.md
@@ -58,6 +67,7 @@ rm "$PLIST_FILE.bak"
 
 cp -R ./bin ../project/payload/Liminal.app/Contents/
 chmod 755 ../project/payload/Liminal.app/Contents/bin/server.bin
+chmod 755 ../project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
 
 cp -R ./lib ../project/payload/Liminal.app/Contents/
 

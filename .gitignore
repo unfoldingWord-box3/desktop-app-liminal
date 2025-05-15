@@ -141,3 +141,5 @@ dist
 .pnp.*
 macos/project/
 /macos/release/
+/macos/buildResources/electron.arm64/
+/macos/buildResources/electron.intel64/
