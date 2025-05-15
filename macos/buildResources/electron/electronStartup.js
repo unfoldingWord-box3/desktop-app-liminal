@@ -4,32 +4,55 @@ const path = require('path');
 
 let serverProcess = null;
 app.name = 'Liminal';
+const port = '19119';
 
-// Function to check if server is running (on port 8000)
+// Function to check if server is running (on port)
 function isServerRunning() {
   try {
     // macOS & Linux: use lsof; Windows would require a different approach
-    execSync('lsof -i:8000 | grep LISTEN', { stdio: 'ignore' });
+    execSync(`lsof -i:${port} | grep LISTEN`, { stdio: 'ignore' });
     return true;
   } catch {
     return false;
   }
 }
 
+/**
+ * wraps timer in a Promise to make an async function that continues after a specific number of milliseconds.
+ * @param {number} ms
+ * @returns {Promise<unknown>}
+ */
+function delay(ms) {
+  return new Promise((resolve) =>
+    setTimeout(resolve, ms)
+  );
+}
+
 function startServer() {
   if (!isServerRunning()) {
-    const serverPath = path.join(__dirname, '..', 'bin', 'server.bin');
-    const resourcesDir = path.join(__dirname, '..', 'lib');
-    console.log('resourcesDir is ' + resourcesDir);
+    const serverPath = './bin/server.bin';
+    const resourcesDir = './lib/';
+    const workingDir =  path.join(__dirname, '..');
+
+    console.log('startServer() - resourcesDir is ' + resourcesDir);
+    const env = {
+      ...process.env,
+      APP_RESOURCES_DIR: resourcesDir,
+      ROCKET_PORT: port
+    };
+
+    console.log('startServer() - env is ', env);
+    
     serverProcess = spawn(serverPath, [], {
       stdio: 'ignore',
       detached: true,
-      env: {...process.env, APP_RESOURCES_DIR: resourcesDir}
+      env: env,
+      cwd: workingDir
     });
     serverProcess.unref();
-    console.log('Server started.');
+    console.log('startServer() - Server started.');
   } else {
-    console.log('Server already running.');
+    console.log(startServer() - 'Server already running.');
   }
 }
 
@@ -38,28 +61,35 @@ function stopServer() {
     // Kill the process we spawned (or use another mechanism if you need gentle shutdown)
     try {
       process.kill(serverProcess.pid);
-      console.log('Server stopped.');
+      console.log('stopServer() - Server stopped.');
     } catch (e) {
       // It may have already exited
+      console.error('stopServer() - Server Failed to stop - process ID kill failed.');
     }
   } else {
-    // Optionally: kill whatever is listening on port 8000
+    // Optionally: kill whatever is listening on port
     try {
-      execSync("lsof -t -i:8000 | xargs kill -9");
-      console.log('Server stopped forcefully.');
+      console.log('stopServer() - Trying to stop server forcefully.');
+      execSync(`lsof -t -i:${port} | xargs kill -9`);
+      console.log('stopServer() - Server stopped forcefully.');
     } catch {
       // ignore if nothing is running
+      console.error(`stopServer() - Server Failed to stop - process at port ${port} ID kill failed.`);
     }
   }
 }
 
 function createWindow () {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600
-  });
+  delay(500).then( () =>
+  {
+    console.log('createWindow() - after delay');
+    const win = new BrowserWindow({
+      width: 800,
+      height: 600
+    });
 
-  win.loadURL('http://127.0.0.1:8000');
+    win.loadURL(`http://127.0.0.1:${port}`);
+  })
 }
 
 app.whenReady().then(() => {
@@ -140,19 +170,27 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
+  console.log('window-all-closed() - app quitting');
   // On macOS, apps are expected to stay alive until explicitly quit
   // but we quit anyway so server doesn't remain running
   app.quit();
 });
 
 app.on('will-quit', () => {
+  console.log('will-quit() - app quitting');
   stopServer();
 });
 
 app.on('before-quit', () => {
+  console.log('before-quit() - app quitting');
   stopServer();
 });
 
 app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  if (BrowserWindow.getAllWindows().length === 0) {
+    console.log('activate() - app creating window since there are none');
+    createWindow();
+  } else {
+    console.log('activate() - app not creating window since there are already windows');
+  }
 });
