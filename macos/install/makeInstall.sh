@@ -41,7 +41,19 @@ cp ../buildResources/appLauncherElectron.sh ../project/payload/Liminal.app/Conte
 cp -R ../buildResources/electron ../project/payload/Liminal.app/Contents/
 # now copy architecture specific electron files
 cp -R ../buildResources/electron.$arch/* ../project/payload/Liminal.app/Contents/electron
-chmod 755 ../project/payload/Liminal.app/Contents/electron/Electron.app/Contents/MacOS/Electron
+
+# Check if Electron executable owner is current user
+ELECTRON_OWNER=$(stat -f %u ../project/payload/Liminal.app/Contents/electron/Electron.app/Contents/MacOS/Electron)
+CURRENT_USER=$(id -u)
+if [ "$ELECTRON_OWNER" != "$CURRENT_USER" ]; then
+    echo "Error: Electron executable owner is not current user. Please run: sudo chown -R $(id -u):$(id -g) ../buildResources/electron.$arch/*"
+    exit 1
+fi
+
+# rename Electron.app folder 
+mv ../project/payload/Liminal.app/Contents/electron/Electron.app ../project/payload/Liminal.app/Contents/electron/Electron
+
+chmod 755 ../project/payload/Liminal.app/Contents/electron/Electron/Contents/MacOS/Electron
 
 mkdir -p ../project/payload/Liminal.app/Contents/Resources
 cp ../buildResources/README.md ../project/payload/Liminal.app/Contents/Resources/README.md
@@ -74,6 +86,9 @@ cp -R ./lib ../project/payload/Liminal.app/Contents/
 mkdir -p ../project/scripts
 cp ../install/post_install_script.sh ../project/scripts/postinstall
 chmod +x ../project/scripts/postinstall
+
+# set execute permission on all folders
+find ../project/payload/Liminal.app/ -type d -exec chmod u+x,g+x,o+x {} +
 
 # build pkg
 cd ..

@@ -43,4 +43,4 @@ echo "bin folder found at $BASE"
 # start electron
 cd $BASE
 export APP_RESOURCES_DIR=./lib/
-./electron/Electron.app/Contents/MacOS/Electron ./electron
+./electron/Electron/Contents/MacOS/Electron ./electron
