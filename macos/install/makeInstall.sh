@@ -23,27 +23,27 @@ cd ../build || exit 1
 # Turn on command echo
 set -x
 
-rm -rf ../project
+rm -rf ../temp/project
 
-mkdir -p ../project/payload/Liminal.app/Contents/MacOS
+mkdir -p ../temp/project/payload/Liminal.app/Contents/MacOS
 
 # convert shell script to app
 #rm -f ../buildResources/appLauncher.sh.x.c
-#shc -f ../buildResources/appLauncher.sh -o ../project/payload/Liminal.app/Contents/MacOS/startLiminal
-#chmod 555 ../project/payload/Liminal.app/Contents/MacOS/startLiminal
+#shc -f ../buildResources/appLauncher.sh -o ../temp/project/payload/Liminal.app/Contents/MacOS/startLiminal
+#chmod 555 ../temp/project/payload/Liminal.app/Contents/MacOS/startLiminal
 
 ## non-electron startup
-# cp ../buildResources/appLauncher.sh ../project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
+# cp ../buildResources/appLauncher.sh ../temp/project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
 
 # electron startup
-cp ../buildResources/appLauncherElectron.sh ../project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
+cp ../buildResources/appLauncherElectron.sh ../temp/project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
 # copy shared electron files
-cp -R ../buildResources/electron ../project/payload/Liminal.app/Contents/
+cp -R ../buildResources/electron ../temp/project/payload/Liminal.app/Contents/
 # now copy architecture specific electron files
-cp -R ../buildResources/electron.$arch/* ../project/payload/Liminal.app/Contents/electron
+cp -R ../temp/electron.$arch/* ../temp/project/payload/Liminal.app/Contents/electron
 
 # Check if Electron executable owner is current user
-ELECTRON_OWNER=$(stat -f %u ../project/payload/Liminal.app/Contents/electron/Electron.app/Contents/MacOS/Electron)
+ELECTRON_OWNER=$(stat -f %u ../temp/project/payload/Liminal.app/Contents/electron/Electron.app/Contents/MacOS/Electron)
 CURRENT_USER=$(id -u)
 if [ "$ELECTRON_OWNER" != "$CURRENT_USER" ]; then
     echo "Error: Electron executable owner is not current user. Please run: sudo chown -R $(id -u):$(id -g) ../buildResources/electron.$arch/*"
@@ -51,16 +51,16 @@ if [ "$ELECTRON_OWNER" != "$CURRENT_USER" ]; then
 fi
 
 # rename Electron.app folder 
-mv ../project/payload/Liminal.app/Contents/electron/Electron.app ../project/payload/Liminal.app/Contents/electron/Electron
+mv ../temp/project/payload/Liminal.app/Contents/electron/Electron.app ../temp/project/payload/Liminal.app/Contents/electron/Electron
 
-chmod 755 ../project/payload/Liminal.app/Contents/electron/Electron/Contents/MacOS/Electron
+chmod 755 ../temp/project/payload/Liminal.app/Contents/electron/Electron/Contents/MacOS/Electron
 
-mkdir -p ../project/payload/Liminal.app/Contents/Resources
-cp ../buildResources/README.md ../project/payload/Liminal.app/Contents/Resources/README.md
+mkdir -p ../temp/project/payload/Liminal.app/Contents/Resources
+cp ../buildResources/README.md ../temp/project/payload/Liminal.app/Contents/Resources/README.md
 
 # add APP_VERSION to Info.plist
-cp ../buildResources/Info.plist ../project/payload/Liminal.app/Contents/
-PLIST_FILE="../project/payload/Liminal.app/Contents/Info.plist"
+cp ../buildResources/Info.plist ../temp/project/payload/Liminal.app/Contents/
+PLIST_FILE="../temp/project/payload/Liminal.app/Contents/Info.plist"
 
 # Check if the file exists
 if [ ! -f "$PLIST_FILE" ]; then
@@ -77,24 +77,24 @@ echo "Replaced \${APP_VERSION} with \"$APP_VERSION\" in $PLIST_FILE."
 #remove backup
 rm "$PLIST_FILE.bak"
 
-cp -R ./bin ../project/payload/Liminal.app/Contents/
-chmod 755 ../project/payload/Liminal.app/Contents/bin/server.bin
-chmod 755 ../project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
+cp -R ./bin ../temp/project/payload/Liminal.app/Contents/
+chmod 755 ../temp/project/payload/Liminal.app/Contents/bin/server.bin
+chmod 755 ../temp/project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
 
-cp -R ./lib ../project/payload/Liminal.app/Contents/
+cp -R ./lib ../temp/project/payload/Liminal.app/Contents/
 
-mkdir -p ../project/scripts
-cp ../install/post_install_script.sh ../project/scripts/postinstall
-chmod +x ../project/scripts/postinstall
+mkdir -p ../temp/project/scripts
+cp ../install/post_install_script.sh ../temp/project/scripts/postinstall
+chmod +x ../temp/project/scripts/postinstall
 
 # set execute permission on all folders
-find ../project/payload/Liminal.app/ -type d -exec chmod u+x,g+x,o+x {} +
+find ../temp/project/payload/Liminal.app/ -type d -exec chmod u+x,g+x,o+x {} +
 
 # build pkg
 cd ..
 pkgbuild \
-  --root ./project/payload \
-  --scripts ./project/scripts \
+  --root ./temp/project/payload \
+  --scripts ./temp/project/scripts \
   --identifier com.yourdomain.liminal \
   --version "$APP_VERSION" \
   --install-location /Applications \
