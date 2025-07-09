@@ -72,7 +72,7 @@ web_modules/
 .node_repl_history
 
 # Output of 'npm pack'
-// *.tgz
+/*.tgz
 
 # Yarn Integrity file
 .yarn-integrity
@@ -144,3 +144,4 @@ macos/project/
 /macos/buildResources/electron.arm64/
 /macos/buildResources/electron.intel64/
 /macos/temp/
+/windows/temp/

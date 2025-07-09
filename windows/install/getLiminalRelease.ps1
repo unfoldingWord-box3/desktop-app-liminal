@@ -34,12 +34,18 @@ Write-Host "Fetching for architecture: $arch from $downloadUrl"
 $destPath = "..\temp\zips\$arch"
 New-Item -ItemType Directory -Force -Path $destPath | Out-Null
 
+# Check if file already exists
+$dest = Join-Path $destPath $filename
+if (Test-Path $dest) {
+    Write-Host "File already exists at $dest, skipping download"
+    exit 0
+}
+
 # Download zip file
 Write-Host "Downloading $arch package..."
-$dest = Join-Path $destPath $filename
-
 try {
     Invoke-WebRequest -Uri $downloadUrl -OutFile $dest
+    Write-Host "Successfully downloaded to $dest"
 }
 catch {
     Write-Host "Error: Failed to download $downloadUrl package to $dest - $($_.Exception.Message)"

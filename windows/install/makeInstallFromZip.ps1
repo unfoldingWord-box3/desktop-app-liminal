@@ -1,0 +1,89 @@
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$zipPath
+,
+    
+    [Parameter(Mandatory=$true)]
+    [string]$destinationFolder,
+    
+    [Parameter(Mandatory=$true)]
+    [string]$arch
+)
+
+Write-Host "Processing '$zipPath
+'"
+
+# Set destination path
+$destination = Join-Path $destinationFolder $arch
+
+# Source the version script and execute it
+$scriptPath = Join-Path $PSScriptRoot "getVersion.ps1"
+if (Test-Path $scriptPath) {
+    . $scriptPath -filename $zipPath
+
+}
+else {
+    Write-Host "Error: getVersion.ps1 script not found"
+    exit 1
+}
+
+# Check if a version was extracted
+if ([string]::IsNullOrEmpty($env:APP_VERSION)) {
+    Write-Host "Error: Unable to extract version from file name '$zipPath
+'."
+    exit 1
+}
+
+# Create temporary directory
+$TEMP_DIR = Join-Path $env:TEMP ([System.Guid]::NewGuid().ToString())
+New-Item -ItemType Directory -Force -Path $TEMP_DIR | Out-Null
+Write-Host "Created temporary directory: $TEMP_DIR"
+
+# Unzip the file
+try {
+    Expand-Archive -Path $zipPath -DestinationPath $TEMP_DIR -Force
+    Write-Host "Successfully unzipped to: $TEMP_DIR"
+}
+catch {
+    Write-Host "Error: Failed to unzip '$zipPath
+' - $($_.Exception.Message)"
+    Remove-Item -Path $TEMP_DIR -Recurse -Force
+    exit 1
+}
+
+# Clean and create build directory
+$buildPath = "..\build"
+if (Test-Path $buildPath) {
+    Remove-Item -Path $buildPath -Recurse -Force
+}
+New-Item -ItemType Directory -Force -Path $buildPath | Out-Null
+
+# Copy files from temp to build
+Copy-Item -Path "$TEMP_DIR\*" -Destination $buildPath -Recurse -Force
+
+# Run makeInstall batch script
+Write-Host "Running makeInstall.bat..."
+$makeInstallPath = Join-Path $PSScriptRoot "makeInstall.bat"
+if (-not (Test-Path $makeInstallPath)) {
+    Write-Host "Error: makeInstall.bat not found at $makeInstallPath"
+    Remove-Item -Path $TEMP_DIR -Recurse -Force
+    exit 1
+}
+
+$process = Start-Process -FilePath $makeInstallPath -ArgumentList $arch -NoNewWindow -Wait -PassThru
+if ($process.ExitCode -ne 0) {
+    Write-Host "Error: makeInstall.bat failed with exit code $($process.ExitCode)"
+    Remove-Item -Path $TEMP_DIR -Recurse -Force
+    exit 1
+}
+
+# Verify installer exists
+$releaseFolder = "..\..\releases\windows"
+$installerExists = Get-ChildItem -Path "$releaseFolder" -Filter "LiminalSetup_*.exe"
+if (-not $installerExists) {
+    Write-Host "Error: LiminalSetup_*.exe not found in $releaseFolder"
+    exit 1
+}
+
+# Clean up temp directory
+Remove-Item -Path $TEMP_DIR -Recurse -Force

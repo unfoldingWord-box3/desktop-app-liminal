@@ -13,6 +13,7 @@ SET SCRIPT_PATH="%~dp0liminal.iss"
 SET OUTPUT_PATH="%~dp0..\..\releases\windows"
 
 REM Run Inno Setup Compiler with the liminal.iss script
+echo "running inno compiler: %INNO_COMPILER_PATH% -O"%OUTPUT_PATH%" %SCRIPT_PATH%"
 %INNO_COMPILER_PATH% -O"%OUTPUT_PATH%" %SCRIPT_PATH%
 
 REM Check for errors
