@@ -15,7 +15,7 @@
    [Icons]
    Name: "{group}\Liminal"; Filename: "{app}\appLauncher.bat"
    Name: "{userdesktop}\Liminal"; Filename: "{app}\appLauncher.bat"; Tasks: desktopicon
-    Name: "{userdesktop}\Liminal README"; Filename: "{app}\README.txt"; Tasks: desktopicon
+   Name: "{userdesktop}\Liminal README"; Filename: "{app}\README.txt"; Tasks: desktopicon
    Name: "{group}\Uninstall Liminal (Delete App Files)"; Filename: "{uninstallexe}"; Parameters: "/DELETE /ALLFILES"
 
    [Run]
