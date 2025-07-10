@@ -89,7 +89,7 @@ try {
     }
 
     $setupScript = ".\install\liminal.iss"
-    $outputPath = ".\releases\windows"
+    $outputPath = "..\releases\windows"
 
     $process = Start-Process -FilePath $innoSetupPath -ArgumentList "/O`"$outputPath`"", $setupScript -NoNewWindow -Wait -PassThru
     if ($process.ExitCode -ne 0) {
