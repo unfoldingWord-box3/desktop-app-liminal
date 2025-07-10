@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# prepares install directory structure in `.\macos\temp\project\payload\Liminal`
+# and then creates the install package
+
 # environment variable must be set
 #   for example do `export APP_VERSION="0.2.7"` before calling script
 
@@ -38,7 +41,7 @@ mkdir -p ../temp/project/payload/Liminal.app/Contents/MacOS
 # electron startup
 cp ../buildResources/appLauncherElectron.sh ../temp/project/payload/Liminal.app/Contents/MacOS/startLiminal.sh
 # copy shared electron files
-cp -R ../buildResources/electron ../temp/project/payload/Liminal.app/Contents/
+cp -R ../../buildResources/electron ../temp/project/payload/Liminal.app/Contents/
 # now copy architecture specific electron files
 cp -R ../temp/electron.$arch/* ../temp/project/payload/Liminal.app/Contents/electron
 

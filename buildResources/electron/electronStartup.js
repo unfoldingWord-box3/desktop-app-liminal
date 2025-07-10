@@ -28,9 +28,12 @@ function delay(ms) {
   );
 }
 
+const MAC_SERVER_PATH = './bin/server.bin';
+const WIN_SERVER_PATH = './bin/server.exe';
+
 function startServer() {
   if (!isServerRunning()) {
-    const serverPath = './bin/server.bin';
+    const serverPath = process.platform === 'win32' ? WIN_SERVER_PATH : MAC_SERVER_PATH;
     const resourcesDir = './lib/';
     const workingDir =  path.join(__dirname, '..');
 
