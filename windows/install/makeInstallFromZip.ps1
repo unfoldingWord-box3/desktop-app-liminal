@@ -61,18 +61,18 @@ New-Item -ItemType Directory -Force -Path $buildPath | Out-Null
 # Copy files from temp to build
 Copy-Item -Path "$TEMP_DIR\*" -Destination $buildPath -Recurse -Force
 
-# Run makeInstall batch script
-Write-Host "Running makeInstall.bat..."
-$makeInstallPath = Join-Path $PSScriptRoot "makeInstall.bat"
+# Run makeInstall PowerShell script
+Write-Host "Running makeInstall.ps1..."
+$makeInstallPath = Join-Path $PSScriptRoot "makeInstall.ps1"
 if (-not (Test-Path $makeInstallPath)) {
-    Write-Host "Error: makeInstall.bat not found at $makeInstallPath"
+    Write-Host "Error: makeInstall.ps1 not found at $makeInstallPath"
     Remove-Item -Path $TEMP_DIR -Recurse -Force
     exit 1
 }
 
-$process = Start-Process -FilePath $makeInstallPath -ArgumentList $arch -NoNewWindow -Wait -PassThru
-if ($process.ExitCode -ne 0) {
-    Write-Host "Error: makeInstall.bat failed with exit code $($process.ExitCode)"
+$result = & "$makeInstallPath" -arch $arch
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Error: makeInstall.ps1 failed with exit code $LASTEXITCODE"
     Remove-Item -Path $TEMP_DIR -Recurse -Force
     exit 1
 }
