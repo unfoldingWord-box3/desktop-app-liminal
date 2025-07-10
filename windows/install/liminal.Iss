@@ -8,9 +8,7 @@
    SolidCompression=yes
 
    [Files]
-   Source: "..\build\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-   Source: "..\buildResources\appLauncherElectron.bat"; DestDir: "{app}"; Flags: ignoreversion
-   Source: "..\buildResources\README.txt"; DestDir: "{app}"; Flags: ignoreversion
+   Source: "..\temp\project\payload\Liminal\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
    [Icons]
    Name: "{group}\Liminal"; Filename: "{app}\appLauncherElectron.bat"

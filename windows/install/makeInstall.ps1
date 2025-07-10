@@ -80,7 +80,6 @@ try {
 
     # Call Inno Setup to create installer
     Write-Host "Building installer..."
-    Set-Location -Path ".."
 
     $innoSetupPath = "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
     if (-not (Test-Path $innoSetupPath)) {
@@ -88,8 +87,15 @@ try {
         exit 1
     }
 
-    $setupScript = ".\install\liminal.iss"
+    Set-Location -Path ".."
     $outputPath = "..\releases\windows"
+
+    # Delete existing exe files from releases directory
+    Get-ChildItem -Path "$outputPath\*.exe" | Remove-Item -Force
+
+    $setupScript = ".\install\liminal.iss"
+
+    Write-Host "Current working directory: $(Get-Location)"
 
     $process = Start-Process -FilePath $innoSetupPath -ArgumentList "/O`"$outputPath`"", $setupScript -NoNewWindow -Wait -PassThru
     if ($process.ExitCode -ne 0) {

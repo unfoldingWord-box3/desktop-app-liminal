@@ -30,9 +30,9 @@ if exist "%SCRIPT_DIR%\..\bin\server.exe" (
 
 echo bin folder found at %BASE%
 
-REM Start electron
+REM Start electron as background process
 cd /d "%BASE%"
 set "APP_RESOURCES_DIR=.\lib\"
-.\electron\electron.exe .\electron
+.\electron\electron.exe .\electron &
 
 endlocal
