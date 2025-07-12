@@ -30,7 +30,7 @@ jobs:
           echo "Intel install:"
           ls -als ./releases/windows/intel64/*.exe
           cd ./releases/windows/intel64
-          echo "PKG_NAME_INTEL=$(ls *.pkg | head -n 1)" >> $GITHUB_ENV
+          echo "PKG_NAME_INTEL=$(ls *.exe | head -n 1)" >> $GITHUB_ENV
           cd ../../../..
 
       - name: Upload intel64 artifacts
