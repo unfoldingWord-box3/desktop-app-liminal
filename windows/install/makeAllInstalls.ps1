@@ -1,3 +1,22 @@
+
+<#
+.SYNOPSIS
+    Creates Windows installation packages for Liminal application.
+
+.DESCRIPTION
+    This script automates the build process for Liminal Windows installers:
+    - Downloads Electron and Liminal releases for specified architectures
+    - Processes and packages the files
+    - Creates installation packages for each supported architecture
+    - Currently supports Intel64 architecture (ARM64 support is commented out)
+
+.NOTES
+    Requires PowerShell and depends on:
+    - getElectronRelease.ps1
+    - getLiminalRelease.ps1
+    - makeInstallFromZip.ps1
+#>
+
 # Define URLs for different architectures
 $LiminalIntel64 = "https://github.com/pankosmia/desktop-app-liminal/releases/download/v0.2.8/liminal-windows-v0.2.8.zip"
 # $LiminalArm64 = "https://github.com/pankosmia/desktop-app-liminal/releases/download/v0.2.8/liminal-macos-mx-v0.2.8.zip"

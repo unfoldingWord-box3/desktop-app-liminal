@@ -1,6 +1,28 @@
-# This script requires APP_VERSION environment variable to be set
-# prepares install directory structure in `.\windows\temp\project\payload\Liminal`
-# and then creates the installer using inno setup compiler
+
+<#
+.SYNOPSIS
+    Creates a Windows installer package for the Liminal application.
+
+.DESCRIPTION
+    This PowerShell script prepares and builds a Windows installer for the Liminal application using Inno Setup.
+    It creates the necessary directory structure, copies required files, and compiles the installer.
+
+.PARAMETER arch
+    The target architecture for the installer (e.g., x64, x86).
+
+.PREREQUISITES
+    - Inno Setup 6 must be installed at "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+    - APP_VERSION environment variable must be set (e.g., $env:APP_VERSION = "0.2.6")
+
+.OUTPUTS
+    Creates an installer at releases\windows\$arch\liminal_installer_*.exe
+
+.NOTES
+    - Cleans up existing installers before building
+    - Creates directory structure in .\windows\temp\project\payload\Liminal
+    - Copies necessary files including Electron, README, bin, and lib directories
+    - Compiles the installer using Inno Setup
+#>
 
 param(
     [Parameter(Mandatory=$true)]
@@ -88,7 +110,7 @@ try {
     }
 
     Set-Location -Path ".."
-    $outputPath = "..\releases\windows"
+    $outputPath = "..\releases\windows\$arch"
 
     # Delete existing exe files from releases directory
     Get-ChildItem -Path "$outputPath\*.exe" | Remove-Item -Force

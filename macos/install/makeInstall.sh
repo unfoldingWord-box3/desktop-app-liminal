@@ -1,12 +1,23 @@
 #!/bin/sh
 
-# prepares install directory structure in `.\macos\temp\project\payload\Liminal`
-# and then creates the install package
-
-# environment variable must be set
-#   for example do `export APP_VERSION="0.2.7"` before calling script
-
-# requires shc - do `brew install shc`
+# MacOS Installation Package Builder Script
+#
+# This script creates a macOS installation package (.pkg) for the Liminal application.
+# It performs the following tasks:
+# 1. Creates the installation directory structure
+# 2. Copies application files and resources
+# 3. Sets up proper permissions
+# 4. Configures application metadata (Info.plist)
+# 5. Builds the final installer package
+#
+# Requirements:
+# - APP_VERSION environment variable must be set (e.g., export APP_VERSION="0.2.7")
+# - Architecture parameter must be provided when running the script (arm64 or intel64)
+# - XCode command line tools must be installed
+# - brew package manager with shc installed (`brew install shc`)
+#
+# Usage: ./makeInstall.sh <architecture>
+# Example: ./makeInstall.sh arm64
 
 # Check if APP_VERSION environment variable is set
 if [ -z "$APP_VERSION" ]; then
