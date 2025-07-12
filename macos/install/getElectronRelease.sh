@@ -1,5 +1,23 @@
 #!/bin/sh
 
+# Synopsis:
+#   getElectronRelease.sh - Downloads and extracts Electron app package for specified architecture
+#
+# Description:
+#   This script downloads an Electron app package from a provided URL and extracts it
+#   to a temporary directory. It checks if the package already exists before downloading
+#   to avoid duplicate downloads.
+#
+# Parameters:
+#   $1 - downloadUrl: URL to download the Electron package from
+#   $2 - arch: Architecture type (e.g., 'arm64' or 'intel64')
+#
+# Return Values:
+#   0 - Success (package downloaded and extracted, or already exists)
+#   1 - Error (missing parameters, download failure, or extraction failure)
+#
+
+
 # Check if filename and destination are provided as an argument
 if [ -z "$2" ]; then
   echo "Usage: $0 <downloadUrl> <arch>"

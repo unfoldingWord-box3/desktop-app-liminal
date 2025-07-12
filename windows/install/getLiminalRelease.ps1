@@ -1,3 +1,24 @@
+
+
+<#
+.SYNOPSIS
+Downloads Liminal release package for specified architecture.
+
+.DESCRIPTION
+This PowerShell script downloads a Liminal release package from a provided URL for a specific architecture.
+It performs the following tasks:
+- Extracts version information from the filename using getVersion.ps1
+- Creates necessary directories for downloaded files
+- Downloads the package if it doesn't already exist
+- Handles errors during download process
+
+.PARAMETER downloadUrl
+The URL from which to download the Liminal package
+
+.PARAMETER arch
+The target architecture for the download (e.g., x64, arm64)
+#>
+
 # Check if filename and destination are provided as arguments
 param(
     [Parameter(Mandatory=$true)]

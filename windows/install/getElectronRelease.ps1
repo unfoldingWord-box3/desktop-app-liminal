@@ -1,3 +1,20 @@
+
+<#
+.SYNOPSIS
+Downloads and extracts Electron release packages for specified architecture.
+
+.DESCRIPTION
+This PowerShell script downloads Electron release packages from a provided URL for a specific architecture.
+It checks if the package already exists, downloads the zip file if needed, and extracts it to a temporary directory.
+The script handles both the download and extraction process with error checking.
+
+.PARAMETER downloadUrl
+The URL to download the Electron release package from.
+
+.PARAMETER arch
+The target architecture (e.g., x64, arm64) for the Electron package.
+#>
+
 # Check if filename and destination are provided as arguments
 param(
     [Parameter(Mandatory=$true)]

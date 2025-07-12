@@ -1,5 +1,31 @@
 #!/bin/sh
 
+# Script: makeInstallFromZip.sh
+# Synopsis: Creates a macOS installer package from a zip file containing application files
+#
+# Description: This script automates the process of creating a macOS installer package (.pkg)
+# from a zip file containing application files. It extracts the version number from the zip
+# filename, creates temporary directories, processes the files, and generates an installer
+# using makeInstall.sh.
+#
+# Requirements:
+# - macOS operating system
+# - zip/unzip command line tools
+# - makeInstall.sh script in the same directory
+# - getVersion.sh script in the same directory
+# - Write permissions in the target directories
+#
+# Parameters:
+#   $1 (filename) - Path to the source zip file containing application files
+#   $2 (destination-folder) - Directory where the final installer package will be placed
+#   $3 (arch) - Target architecture, either 'arm64' or 'intel64'
+#
+# Returns:
+#   0 - Success
+#   1 - Error (invalid parameters or processing failure)
+#   
+# Generated files will be placed in <destination-folder>/<arch>/liminal_installer_*.pkg
+
 # Check if filename and destination are provided as an argument
 if [ -z "$3" ]; then
   echo "Usage: $0 <filename> <destination-folder> <arch>"

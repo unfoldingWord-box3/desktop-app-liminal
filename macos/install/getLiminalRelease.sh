@@ -1,5 +1,21 @@
 #!/bin/sh
 
+# Synopsis:
+#   getLiminalRelease.sh <downloadUrl> <arch>
+#
+# Description:
+#   Downloads a Liminal release package from the specified URL for a given architecture.
+#   The script extracts the version from the filename, creates necessary directories,
+#   and downloads the package to a temporary location.
+#
+# Parameters:
+#   downloadUrl - The URL from which to download the release package
+#   arch       - The target architecture (e.g., 'arm64' or 'intel64')
+#
+# Return values:
+#   0 - Success
+#   1 - Error (missing arguments, version extraction failure, or download failure)
+
 # Check if filename and destination are provided as an argument
 if [ -z "$2" ]; then
   echo "Usage: $0 <downloadUrl> <arch>"

@@ -2,22 +2,34 @@
 
 # MacOS Installation Package Builder Script
 #
-# This script creates a macOS installation package (.pkg) for the Liminal application.
-# It performs the following tasks:
-# 1. Creates the installation directory structure
-# 2. Copies application files and resources
-# 3. Sets up proper permissions
-# 4. Configures application metadata (Info.plist)
-# 5. Builds the final installer package
+# Synopsis:
+#   Creates a macOS installation package (.pkg) for the Liminal application
+#   based on provided architecture (arm64 or intel64) and APP_VERSION.
+#
+# Description:
+#   This script automates the process of building a macOS installer package by:
+#   1. Creating the installation directory structure
+#   2. Copying application files and resources
+#   3. Setting up proper permissions
+#   4. Configuring application metadata (Info.plist)
+#   5. Building the final installer package
 #
 # Requirements:
-# - APP_VERSION environment variable must be set (e.g., export APP_VERSION="0.2.7")
-# - Architecture parameter must be provided when running the script (arm64 or intel64)
-# - XCode command line tools must be installed
-# - brew package manager with shc installed (`brew install shc`)
+#   - APP_VERSION environment variable must be set (e.g., export APP_VERSION="0.2.7")
+#   - Architecture parameter must be provided when running the script (arm64 or intel64)
+#   - XCode command line tools must be installed
+#   - brew package manager with shc installed (`brew install shc`)
 #
-# Usage: ./makeInstall.sh <architecture>
-# Example: ./makeInstall.sh arm64
+# Parameters:
+#   $1 : Architecture type (Required)
+#        Accepted values: arm64, intel64
+#
+# Returns:
+#   0 : Success
+#   1 : Failure (Invalid/missing parameters or execution error)
+#
+# Output:
+#   Creates installer package at: ../releases/macos/liminal_installer_<arch>_<version>.pkg
 
 # Check if APP_VERSION environment variable is set
 if [ -z "$APP_VERSION" ]; then

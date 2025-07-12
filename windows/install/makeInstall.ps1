@@ -112,8 +112,10 @@ try {
     Set-Location -Path ".."
     $outputPath = "..\releases\windows\$arch"
 
-    # Delete existing exe files from releases directory
-    Get-ChildItem -Path "$outputPath\*.exe" | Remove-Item -Force
+    # Delete existing exe files from releases directory, only if path exists
+    if (Test-Path "$outputPath\*.exe") {
+        Get-ChildItem -Path "$outputPath\*.exe" | Remove-Item -Force
+    }
 
     $setupScript = ".\install\liminal.iss"
 

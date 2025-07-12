@@ -1,5 +1,22 @@
 #!/bin/sh
 
+# Synopsis:
+#   makeAllInstalls.sh
+#
+# Description:
+#   This script automates the build process for Liminal application on macOS,
+#   creating installation packages for both Intel (x64) and ARM64 architectures.
+#   It downloads the required Electron and Liminal releases, and processes them
+#   into installable packages.
+#
+# Parameters:
+#   None - All URLs and architectures are hardcoded in the script
+#
+# Return Values:
+#   0 - Success, all architectures built successfully
+#   1 - Error occurred during download or build process
+#
+
 LiminalIntel64="https://github.com/pankosmia/desktop-app-liminal/releases/download/v0.2.8/liminal-macos-intel64-v0.2.8.zip"
 
 LiminalArm64="https://github.com/pankosmia/desktop-app-liminal/releases/download/v0.2.8/liminal-macos-mx-v0.2.8.zip"
