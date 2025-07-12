@@ -1,6 +1,11 @@
 name: Run makeInstall.sh on macOS 13
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+  push:
+    branches: ["**"]     # Run on push to any branch
+  pull_request:
+    branches: ["**"]     # Run on PR to any branch
 
 jobs:
   run-make-install:
