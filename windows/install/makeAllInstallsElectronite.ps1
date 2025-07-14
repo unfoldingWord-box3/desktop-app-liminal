@@ -57,7 +57,7 @@ foreach ($ARCH in @("intel64")) {
     # Make install from zip
     Write-Host "Creating install package..."
     $zipPath = Resolve-Path "..\temp\zips\$ARCH\liminal*.zip"
-    $installResult = & "$PSScriptRoot\makeInstallFromZip.ps1" -zipPath $zipPath -destinationFolder "..\temp\release" -arch $ARCH
+    $installResult = & "$PSScriptRoot\makeInstallElectroniteFromZip.ps1" -zipPath $zipPath -destinationFolder "..\temp\release" -arch $ARCH
     if ($LASTEXITCODE -ne 0) {
         Write-Host "Error: Build failed for architecture $ARCH"
         exit 1
