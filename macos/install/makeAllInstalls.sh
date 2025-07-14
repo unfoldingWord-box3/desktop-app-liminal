@@ -21,9 +21,9 @@ LiminalIntel64="https://github.com/pankosmia/desktop-app-liminal/releases/downlo
 
 LiminalArm64="https://github.com/pankosmia/desktop-app-liminal/releases/download/v0.2.8/liminal-macos-mx-v0.2.8.zip"
 
-ElectronArm64="https://github.com/unfoldingWord/electronite/releases/download/v17.1.0-graphite/electronite-v17.1.0-graphite-darwin-arm64.zip"
+ElectronArm64="https://github.com/unfoldingWord/electronite/releases/download/v37.1.0-graphite/electronite-v37.1.0-graphite-darwin-arm64.zip"
 
-ElectronIntel64="https://github.com/unfoldingWord/electronite/releases/download/v17.1.0-graphite/electronite-v17.1.0-graphite-darwin-x64.zip"
+ElectronIntel64="https://github.com/unfoldingWord/electronite/releases/download/v37.1.0-graphite/electronite-v37.1.0-graphite-darwin-x64.zip"
 
 # Loop through creating installs for both arm64 and intel64
 for ARCH in "intel64" "arm64"; do
