@@ -20,9 +20,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run makeAllInstalls.ps1
+      - name: Run makeAllInstallsElectronite.ps1
         working-directory: ./windows/install
-        run: ./makeAllInstalls.ps1
+        run: ./makeAllInstallsElectronite.ps1
 
       - name: get Installer names
         shell: bash
