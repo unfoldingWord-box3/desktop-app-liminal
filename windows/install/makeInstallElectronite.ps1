@@ -93,7 +93,7 @@ try {
     # Delete existing exe files from releases directory
     Get-ChildItem -Path "$outputPath\*.exe" | Remove-Item -Force
 
-    $setupScript = ".\install\liminal.iss"
+    $setupScript = ".\install\makeInstallElectronite.iss"
 
     Write-Host "Current working directory: $(Get-Location)"
 

@@ -61,18 +61,18 @@ New-Item -ItemType Directory -Force -Path $buildPath | Out-Null
 # Copy files from temp to build
 Copy-Item -Path "$TEMP_DIR\*" -Destination $buildPath -Recurse -Force
 
-# Run makeInstall PowerShell script
-Write-Host "Running makeInstall.ps1..."
-$makeInstallPath = Join-Path $PSScriptRoot "makeInstall.ps1"
-if (-not (Test-Path $makeInstallPath)) {
-    Write-Host "Error: makeInstall.ps1 not found at $makeInstallPath"
+# Run makeInstallElectronite PowerShell script
+Write-Host "Running makeInstallElectronite.ps1..."
+$makeInstallElectronitePath = Join-Path $PSScriptRoot "makeInstallElectronite.ps1"
+if (-not (Test-Path $makeInstallElectronitePath)) {
+    Write-Host "Error: makeInstallElectronite.ps1 not found at $makeInstallElectronitePath"
     Remove-Item -Path $TEMP_DIR -Recurse -Force
     exit 1
 }
 
-$result = & "$makeInstallPath" -arch $arch
+$result = & "$makeInstallElectronitePath" -arch $arch
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "Error: makeInstall.ps1 failed with exit code $LASTEXITCODE"
+    Write-Host "Error: makeInstallElectronite.ps1 failed with exit code $LASTEXITCODE"
     Remove-Item -Path $TEMP_DIR -Recurse -Force
     exit 1
 }
