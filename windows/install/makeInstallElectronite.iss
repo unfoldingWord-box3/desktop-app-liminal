@@ -8,14 +8,12 @@
    SolidCompression=yes
 
    [Files]
-   Source: "..\build\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-   Source: "..\buildResources\appLauncher.bat"; DestDir: "{app}"; Flags: ignoreversion
-   Source: "..\buildResources\README.txt"; DestDir: "{app}"; Flags: ignoreversion
+   Source: "..\temp\project\payload\Liminal\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
    [Icons]
-   Name: "{group}\Liminal"; Filename: "{app}\appLauncher.bat"
-   Name: "{userdesktop}\Liminal"; Filename: "{app}\appLauncher.bat"; Tasks: desktopicon
-    Name: "{userdesktop}\Liminal README"; Filename: "{app}\README.txt"; Tasks: desktopicon
+   Name: "{group}\Liminal"; Filename: "{app}\appLauncherElectron.bat"
+   Name: "{userdesktop}\Liminal"; Filename: "{app}\appLauncherElectron.bat"; Tasks: desktopicon
+   Name: "{userdesktop}\Liminal README"; Filename: "{app}\README.txt"; Tasks: desktopicon
    Name: "{group}\Uninstall Liminal (Delete App Files)"; Filename: "{uninstallexe}"; Parameters: "/DELETE /ALLFILES"
 
    [Run]
