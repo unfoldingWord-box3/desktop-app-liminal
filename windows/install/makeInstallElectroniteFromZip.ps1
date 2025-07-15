@@ -9,7 +9,7 @@ and creates a Windows installer. It performs the following steps:
 1. Extracts version information from the zip filename
 2. Unzips the contents to a temporary directory
 3. Copies files to the build directory
-4. Runs makeInstall.ps1 to create the final installer
+4. Runs makeInstallElectronite.ps1 to create the final installer
 5. Verifies the installer was created successfully
 6. Cleans up temporary files
 

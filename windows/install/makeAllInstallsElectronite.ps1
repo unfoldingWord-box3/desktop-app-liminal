@@ -14,7 +14,7 @@
     Requires PowerShell and depends on:
     - getElectronRelease.ps1
     - getLiminalRelease.ps1
-    - makeInstallFromZip.ps1
+    - makeInstallFromZipElectronite.ps1
 #>
 
 # Define URLs for different architectures

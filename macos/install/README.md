@@ -2,11 +2,11 @@
 
 ### Building MacOS installer from release
 1. cd into `macos/install`
-3. edit `makeAllInstalls.sh` update URL to latest Liminal build
+3. edit `makeAllInstallsElectronite.sh` update URL to latest Liminal build
 3. then run from `macos/install`:
 ```shell
-chmod +x ./makeAllInstalls.zsh
-./makeAllInstalls.zsh
+chmod +x ./makeAllInstallsElectronite.zsh
+./makeAllInstallsElectronite.zsh
 ```
 
 ### Building app locally
@@ -15,6 +15,6 @@ chmod +x ./makeAllInstalls.zsh
 3. make sure APP_VERSION environment variable is set. Such as `export APP_VERSION="0.2.7"`
 4. then run from `macos/install`:
 ```shell
-chmod +x ./makeInstall.zsh
-./makeInstall.zsh
+chmod +x ./makeInstallElectronite.zsh
+./makeInstallElectronite.zsh
 ```

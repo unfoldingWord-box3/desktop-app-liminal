@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Synopsis:
-#   makeAllInstalls.sh
+#   makeAllInstallsElectronite.sh
 #
 # Description:
 #   This script automates the build process for Liminal application on macOS,
@@ -55,7 +55,7 @@ for ARCH in "intel64" "arm64"; do
     fi
     
     # unzip the liminal install files and create mac install package
-    ./makeInstallFromZip.sh  ../temp/zips/$ARCH/liminal*.zip ../temp/release $ARCH
+    ./makeInstallFromZipElectronite.sh  ../temp/zips/$ARCH/liminal*.zip ../temp/release $ARCH
     
     if [ $? -ne 0 ]; then
         echo "Error: Build failed for architecture $ARCH"

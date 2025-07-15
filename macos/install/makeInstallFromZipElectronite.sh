@@ -1,17 +1,17 @@
 #!/bin/sh
 
-# Script: makeInstallFromZip.sh
+# Script: makeInstallFromZipElectronite.sh
 # Synopsis: Creates a macOS installer package from a zip file containing application files
 #
 # Description: This script automates the process of creating a macOS installer package (.pkg)
 # from a zip file containing application files. It extracts the version number from the zip
 # filename, creates temporary directories, processes the files, and generates an installer
-# using makeInstall.sh.
+# using makeInstallElectronite.sh.
 #
 # Requirements:
 # - macOS operating system
 # - zip/unzip command line tools
-# - makeInstall.sh script in the same directory
+# - makeInstallElectronite.sh script in the same directory
 # - getVersion.sh script in the same directory
 # - Write permissions in the target directories
 #
@@ -65,7 +65,7 @@ rm -rf ../build
 mkdir -p ../build
 cp -R "$TEMP_DIR"/* ../build/
 
-./makeInstall.sh $arch
+./makeInstallElectronite.sh $arch
 
 rm -rf "$destination"
 mkdir -p "$destination"

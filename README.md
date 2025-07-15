@@ -81,7 +81,7 @@ Windows Powershell (exe):
 ```text
 cd ../install
 $env:APP_VERSION = "0.2.7"
-.\makeInstall.bat
+.\makeInstallElectronite.bat
 ```
 
 Or, if you really want a windows zip file -- Windows Powershell (zip):

@@ -1,4 +1,4 @@
-name: Run makeInstall.sh on macOS 13
+name: Run makeInstallElectronite.sh on macOS 13
 
 on:
   workflow_dispatch:
@@ -18,11 +18,11 @@ jobs:
 
       # Grant execute permissions for the shell script
       - name: Make script executable
-        run: chmod +x ./macos/install/makeAllInstalls.sh
+        run: chmod +x ./macos/install/makeAllInstallsElectronite.sh
 
-      - name: Run makeAllInstalls.sh
+      - name: Run makeAllInstallsElectronite.sh
         working-directory: ./macos/install
-        run: ./makeAllInstalls.sh
+        run: ./makeAllInstallsElectronite.sh
 
       - name: get Installer names
         run: |
